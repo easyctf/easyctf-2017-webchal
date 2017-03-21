@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Showing public results for "{{ search_phrase }}":</h2>
+
+<hr>
+
+<div id="results">
+  {% if results %}
+    {% for result in results %}
+      <h3>{{ result.title }}</h3>
+      <p>{{ result.body }}</p>
+      <span style="visibility:hidden">{{ result.tagstring }}</span>
+    {% endfor %}
+  {% else %}
+    <h3>Sorry, nothing found.</h3>
+  {% endif %}
+</div>
+
+{% endblock %}

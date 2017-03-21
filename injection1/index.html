@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>Injection 1</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    {% if error %}
+        <div style="color:red">{{ error }}</div>
+    {% endif %}
+    {% if logged_in %}
+        <p>Thanks for logging in. Your flag is <code>easyctf{a_prepared_statement_a_day_keeps_the_d0ctor_away!}</code></p>
+    {% else %}
+        <form method=POST>
+            <input type=text name=username placeholder=Username autocomplete=off autofocus /><br />
+            <input type=password name=password placeholder=Password /><br />
+            <input type=submit />
+        </form>
+    {% endif %}
+</body>
+
+</html>

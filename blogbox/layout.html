@@ -1,0 +1,34 @@
+<html>
+
+<head>
+  <title>Blogbox</title>
+  <link href="http://bootswatch.com/superhero/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="padding-top:65px">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('index') }}"><strong>Blogbox</strong></a>
+      </div>
+      <form class="navbar-form navbar-right" action="/" method="POST">
+        <div class="form-group">
+          <input type="text" name = "query"   class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default"><span>GO</span></button>
+      </form>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  <hr>
+  <div class="footer text-center">
+    <p>EasyCTF - 2017</p>
+  </div>
+</body>
+
+
+</html>

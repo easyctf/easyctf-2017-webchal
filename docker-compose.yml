@@ -1,0 +1,113 @@
+version: '2'
+
+services:
+  db:
+    restart: "always"
+    build: mysql
+    expose:
+      - 3306
+
+  cookieblog:
+    restart: "always"
+    build: cookieblog
+    expose:
+      - 80
+
+  hexqr:
+    restart: "always"
+    build: hexqr
+    expose:
+      - 80
+
+  injection1:
+    restart: "always"
+    build: injection1
+    expose:
+      - 80
+    links:
+      - db
+    # volumes:
+    #   - ./injection1:/app
+    
+  injection2:
+    restart: "always"
+    build: injection2
+    expose:
+      - 80
+    links:
+      - db
+    # volumes:
+    #   - ./injection2:/app
+
+  tinyeval:
+    restart: "always"
+    build: tinyeval
+    env_file: .env
+    expose:
+      - 80
+    # volumes:
+    #   - ./tinyeval:/app
+
+  blogbox:
+    restart: "always"
+    build: blogbox
+    expose:
+      - 80
+    links:
+      - db
+
+  genius:
+    restart: "always"
+    build: genius
+    env_file: .env
+    expose:
+      - 80
+
+  edge1:
+    restart: "always"
+    build: edge1
+    env_file: .env
+    expose:
+      - 80
+
+  edge2:
+    restart: "always"
+    build: edge2
+    env_file: .env
+    expose:
+      - 80
+
+  tunnel:
+    restart: "always"
+    build: tunnel
+    expose:
+      - 80
+  
+  wayward:
+    restart: "always"
+    build: wayward
+    ports:
+      - "8580:8580"
+  
+  paillier:
+    restart: "always"
+    build: paillier
+    ports:
+      - "8570:8570"
+
+  main:
+    restart: "always"
+    build: nginx
+    links:
+      - tinyeval
+      - genius
+      - injection1
+      - injection2
+      - blogbox
+      - hexqr
+      - tunnel
+    ports:
+      - '80:80'
+      - '443:443'
+    # volumes:
+    #   - ./nginx:/etc/nginx/conf.d
